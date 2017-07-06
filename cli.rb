@@ -10,12 +10,12 @@ parser = OptionParser.new do |opts|
     options[:message] = v
   end
 
-  opts.on("-e", "--encrypt N", Integer, "Rotation") do |v|
+  opts.on("-e", "--encrypt N", Integer, "Encrypt with Rotation") do |v|
     options[:rotation] = v
     options[:encrypt] = true
   end
 
-  opts.on("-d", "--decrypt [N]", Integer, "Rotation") do |v|
+  opts.on("-d", "--decrypt [N]", Integer, "Decrypt with or without Rotation") do |v|
     if v.nil?
       options[:break] = true
     else
@@ -24,6 +24,12 @@ parser = OptionParser.new do |opts|
     end
   end
 
+  opts.on_tail("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+
+  options[:help] = opts.help
 end.parse!
 
 cipher = Cipher.new
@@ -36,7 +42,7 @@ result =
   elsif options[:break]
     cipher.break(options[:message])
   else
-    'see help'
+    options[:help]
   end
 
-p result
+puts result
