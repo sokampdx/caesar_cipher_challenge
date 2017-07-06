@@ -1,6 +1,6 @@
 class Cipher
   def load_dict
-    list = File.readlines('/usr/share/dict/words') 
+    list = File.readlines('./words') 
     list.map { |word| word.chomp.downcase if word.length > 5 }
   end
 
