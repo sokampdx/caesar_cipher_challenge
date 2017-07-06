@@ -1,7 +1,7 @@
 class Cipher
   def load_dict
     list = File.readlines('./words') 
-    list.map { |word| word.chomp.downcase if word.length > 5 }
+    list.map { |word| word.chomp.downcase if word.length >= 4 }
   end
 
   def encrypt(message, rotation)
